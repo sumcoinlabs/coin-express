@@ -41,20 +41,6 @@ fi
 echo "Enter your sudo password:"
 read -s -r password
 echo ""
-echo "Updating package lists..."
-echo "$password" | sudo -S apt-get update
-echo "Package lists updated successfully!"
-
-echo "Installing git..."
-echo "$password" | sudo -S apt-get install git
-echo "git installed successfully!"
-
-echo "Installing build-essential and other dependencies..."
-echo "$password" | sudo -S apt-get install -y build-essential libtool autotools-dev automake pkg-config libssl-dev libevent-dev bsdmainutils
-echo "$password" | sudo -S apt-get install -y libboost-system-dev libboost-filesystem-dev libboost-chrono-dev libboost-program-options-dev libboost-test-dev libboost-thread-dev
-echo "$password" | sudo -S apt-get install -y libboost-all-dev
-echo "$password" | sudo -S apt-get install -y software-properties-common
-echo "Dependencies installed successfully!"
 
 
 # Install build-essential and dependencies

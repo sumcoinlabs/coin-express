@@ -38,9 +38,6 @@ if [[ ! $confirmation =~ ^[Yy]$ ]]; then
     exit 1
 fi
 
-echo "Enter your sudo password:"
-read -s -r password
-echo ""
 echo "Updating package lists..."
 echo "$password" | sudo -S apt-get update
 echo "Package lists updated successfully!"
@@ -56,19 +53,23 @@ echo "$password" | sudo -S apt-get install -y libboost-all-dev
 echo "$password" | sudo -S apt-get install -y software-properties-common
 echo "Dependencies installed successfully!"
 
-echo "Adding bitcoin repository..."
-echo "$password" | sudo -S add-apt-repository -y ppa:bitcoin/bitcoin
+#!/bin/bash
 
-echo "Updating package lists..."
-echo "$password" | sudo -S apt-get update
-echo "Package lists updated successfully!"
+# Install build-essential and dependencies
+sudo apt-get update
+sudo apt-get install build-essential autoconf libssl-dev libboost-dev libboost-chrono-dev libboost-filesystem-dev libboost-program-options-dev libboost-system-dev libboost-test-dev libboost-thread-dev libqt4-dev libprotobuf-dev protobuf-compiler libqrencode-dev -y
 
-echo "Installing bitcoin related dependencies..."
-echo "$password" | sudo -S apt-get install -y libdb4.8-dev libdb4.8++-dev
-echo "$password" | sudo -S apt-get install -y libminiupnpc-dev
-echo "$password" | sudo -S apt-get install -y libzmq3-dev
-echo "$password" | sudo -S apt-get install -y libqt5gui5 libqt5core5a libqt5dbus5 qttools5-dev qttools5-dev-tools libprotobuf-dev protobuf-compiler
-echo "$password" | sudo -S apt-get install -y libqt4-dev libprotobuf-dev protobuf-compiler
+# Download and extract Berkeley DB 4.8.30
+wget http://download.oracle.com/berkeley-db/db-4.8.30.NC.tar.gz
+tar -xzvf db-4.8.30.NC.tar.gz
+
+# Build and install Berkeley DB
+cd db-4.8.30.NC/build_unix/
+sudo mkdir -p build
+BDB_PREFIX=$(pwd)/build
+../dist/configure --disable-shared --enable-cxx --with-pic --build=unknown-unknown-linux --prefix=$BDB_PREFIX
+sudo make install
+
 echo "Bitcoin related dependencies installed successfully!"
 
 read -p "Please select a coin to clone (1-Sumcoin, 2-Bitcoin, 3-Litecoin): " coin_number

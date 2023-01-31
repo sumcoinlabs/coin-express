@@ -56,7 +56,6 @@ echo "$password" | sudo -S apt-get install -y libboost-all-dev
 echo "$password" | sudo -S apt-get install -y software-properties-common
 echo "Dependencies installed successfully!"
 
-#!/bin/bash
 
 # Install build-essential and dependencies
 sudo apt-get update

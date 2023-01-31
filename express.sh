@@ -38,6 +38,9 @@ if [[ ! $confirmation =~ ^[Yy]$ ]]; then
     exit 1
 fi
 
+echo "Enter your sudo password:"
+read -s -r password
+echo ""
 echo "Updating package lists..."
 echo "$password" | sudo -S apt-get update
 echo "Package lists updated successfully!"

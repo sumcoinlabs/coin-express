@@ -86,7 +86,7 @@ read -p "Do you want to configure and build $coin_dir? (y/n): " build_coin
 if [ "$build_coin" == "y" ]; then
     cd $coin_dir
     ./autogen.sh
-    ./configure --disable-tests
+    ./configure --disable-tests CPPFLAGS="-I${BDB_PREFIX}/include/ -O2" LDFLAGS="-L${BDB_PREFIX}/lib/" --with-gui --with-miniupnpc --enable-upnp-default --enable-hardening
     make
 else
     echo "Skipping build process for $coin_dir."

@@ -45,7 +45,13 @@ echo ""
 
 # Install build-essential and dependencies
 sudo apt-get update
-sudo apt-get install build-essential autoconf libssl-dev libboost-dev libboost-chrono-dev libboost-filesystem-dev libboost-program-options-dev libboost-system-dev libboost-test-dev libboost-thread-dev libprotobuf-dev protobuf-compiler libqrencode-dev -y
+sudo apt-get install -y build-essential autoconf libssl-dev libboost-dev libboost-chrono-dev libboost-filesystem-dev libboost-program-options-dev libboost-system-dev libboost-test-dev libboost-thread-dev libprotobuf-dev protobuf-compiler libqrencode-dev -y
+sudo apt-get install -y libqt5gui5 libqt5core5a libqt5dbus5 qttools5-dev qttools5-dev-tools libprotobuf-dev protobuf-compiler
+sudo apt-get install -y libminiupnpc-dev
+sudo apt-get install -y libzmq3-dev
+sudo apt-get install -y libminiupnpc-dev
+sudo apt-get update
+
 
 # Download and extract Berkeley DB 4.8.30
 wget http://download.oracle.com/berkeley-db/db-4.8.30.NC.tar.gz
@@ -62,8 +68,8 @@ echo "Bitcoin related dependencies installed successfully!"
 
 read -p "Please select a coin to clone (1-Sumcoin, 2-Bitcoin, 3-Litecoin): " coin_number
 case $coin_number in
-"1") git clone -b 0.17 https://github.com/sumcoinlabs/sumcoin.git
-    coin_dir="sumcoin";;
+"1") git clone https://github.com/sumcoinlabs/nn17.git
+    coin_dir="nn17";;
 "2") git clone -b 0.17 https://github.com/bitcoin/bitcoin.git
     coin_dir="bitcoin";;
 "3") git clone -b 0.17 https://github.com/litecoin-project/litecoin.git
@@ -74,7 +80,7 @@ read -p "Do you want to configure and build $coin_dir? (y/n): " build_coin
 if [ "$build_coin" == "y" ]; then
     cd $coin_dir
     ./autogen.sh
-    ./configure --disable-tests CPPFLAGS="-I${BDB_PREFIX}/include/ -O2" LDFLAGS="-L${BDB_PREFIX}/lib/" --with-gui --with-miniupnpc --enable-upnp-default --enable-hardening
+    ./configure --with-incompatible-bdb --disable-tests --disable-bench
     make
 else
     echo "Skipping build process for $coin_dir."

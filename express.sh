@@ -45,7 +45,7 @@ echo ""
 
 # Install build-essential and dependencies
 sudo apt-get update
-sudo apt-get install build-essential autoconf libssl-dev libboost-dev libboost-chrono-dev libboost-filesystem-dev libboost-program-options-dev libboost-system-dev libboost-test-dev libboost-thread-dev libqt4-dev libprotobuf-dev protobuf-compiler libqrencode-dev -y
+sudo apt-get install build-essential autoconf libssl-dev libboost-dev libboost-chrono-dev libboost-filesystem-dev libboost-program-options-dev libboost-system-dev libboost-test-dev libboost-thread-dev libprotobuf-dev protobuf-compiler libqrencode-dev -y
 
 # Download and extract Berkeley DB 4.8.30
 wget http://download.oracle.com/berkeley-db/db-4.8.30.NC.tar.gz

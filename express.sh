@@ -44,6 +44,7 @@ echo ""
 
 
 # Install build-essential and dependencies
+sudo apt install git
 sudo apt-get update
 sudo apt-get install -y build-essential autoconf libssl-dev libboost-dev libboost-chrono-dev libboost-filesystem-dev libboost-program-options-dev libboost-system-dev libboost-test-dev libboost-thread-dev libprotobuf-dev protobuf-compiler libqrencode-dev -y
 sudo apt-get install -y libqt5gui5 libqt5core5a libqt5dbus5 qttools5-dev qttools5-dev-tools libprotobuf-dev protobuf-compiler
@@ -58,11 +59,11 @@ wget http://download.oracle.com/berkeley-db/db-4.8.30.NC.tar.gz
 tar -xzvf db-4.8.30.NC.tar.gz
 
 # Build and install Berkeley DB
-cd db-4.8.30.NC/build_unix/
-sudo mkdir -p build
-BDB_PREFIX=$(pwd)/build
-../dist/configure --disable-shared --enable-cxx --with-pic --build=unknown-unknown-linux --prefix=$BDB_PREFIX
-sudo make install
+#cd db-4.8.30.NC/build_unix/
+#sudo mkdir -p build
+#BDB_PREFIX=$(pwd)/build
+#../dist/configure --disable-shared --enable-cxx --with-pic --build=unknown-unknown-linux --prefix=$BDB_PREFIX
+#sudo make install
 
 echo "Bitcoin related dependencies installed successfully!"
 
